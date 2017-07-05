@@ -2,7 +2,10 @@
 
 6502 assembly code to print an unsigned 16-bit in 124 bytes ($7C).
 
+
 # Machine Code
+
+Copy/Paste into your favorite emulator.
 
 ```asm
 0800:A9 12 A2 34 4C 07 08 8E
@@ -24,9 +27,16 @@
 0880:00 00 00 
 ```
 
+
 # License
 
 [WTFPL](http://www.wtfpl.net/)
+
+
+# Thaanks
+
+* qkumba for great optimization ideas as always
+
 
 # References
 
