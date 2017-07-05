@@ -24,7 +24,13 @@
 0880:00 00 00 
 ```
 
+# License
+
+[WTFPL](http://www.wtfpl.net/)
+
 # References
+
+* [printm](https://github.com/Michaelangel007/apple2_printm)
 
 Apple Monitor: Print Integer?
 * https://groups.google.com/forum/m/#!topic/comp.sys.apple2/EQmJAuNz8Vg 
