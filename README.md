@@ -3,6 +3,10 @@
 6502 assembly code to print an unsigned 16-bit in 124 bytes ($7C).
 
 
+* No zero-page usage
+* Only 1 ROM entry point: COUT
+
+
 # Machine Code
 
 Copy/Paste into your favorite emulator.
