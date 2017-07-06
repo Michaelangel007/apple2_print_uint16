@@ -45,25 +45,17 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         CLD             ; X=0 = output length
 
 DecWidth
-        LDY #4          ; 6 digit output for special case of $0000
-
-        LDA #'0' + $80  ; handle special case input = $0000
-        STA _output     ; since we always print at least 1 digit
-
+        LDY #3          ; maximum 6 digits output
 BCD2Chars
         LDA _bcd-1,Y
-        JSR HexA        ; _output[0..7] = '?'
+        JSR HexA        ; print 0, 1, or 2 hex digits
         DEY
         BNE BCD2Chars
 
-        STX _len        ; output buffer len = num digits to print
+        TXA
+        CPX #0          ; Handle special case input = $0000 of no output
+        BEQ  _HaveLeadingDigit
 
-OutDigits
-        LDA _output,Y   ; always print digit in "ones" place
-        JSR COUT
-        INY
-        CPY _len
-        BCC OutDigits
 _PrintDone
         RTS
 
@@ -83,20 +75,16 @@ _HexNib
 
 _HaveLeadingDigit
         CMP #$A         ; n < 10 ?
-
         BCC _Hex2Asc
         ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
 _Hex2Asc
         ADC #'0' + $80  ; inverse=remove #$80
 PutChar
-        STA _output,X
+        JSR COUT
         INX             ; X = output string length
 _HexAsciiDone
         RTS
 
-
 _bcd    ds  4   ; 6 chars for printing dec
-_len    = _bcd  ; alias
-_output ds  6   ; BCD -> 6 chars
 _temp   db  0,0
 
