@@ -17,5 +17,5 @@ print_uint16_sp: print_uint16_sp.s
 dump: $(TARGETS)
 	hexdump8 print_uint16    800
 	hexdump8 print_uint16_zp 900
-	hexdump8 print_uint16_sp 900
+	hexdump8 print_uint16_sp a00
 
