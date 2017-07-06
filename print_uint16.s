@@ -60,7 +60,7 @@ _PrintDone
         RTS
 
 
-; Converts A to high ASCII digits, stores chars in _output
+; Converts A to high ASCII digits, prints as they become available
 ; @return: A will be bottom nibble in high ASCII
 HexA
         PHA
