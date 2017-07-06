@@ -71,7 +71,7 @@ HexA
 _HexNib
         BNE _HaveLeadingDigit   ; If have leading zero and no output yet ...
         CPX #0                  ; ... then skip storing it
-        BEQ _HexAsciiDone
+        BEQ _PrintDone
 
 _HaveLeadingDigit
         CMP #$A         ; n < 10 ?
@@ -80,10 +80,8 @@ _HaveLeadingDigit
 _Hex2Asc
         ADC #'0' + $80  ; inverse=remove #$80
 PutChar
-        JSR COUT
         INX             ; X = output string length
-_HexAsciiDone
-        RTS
+        JMP COUT
 
 _bcd    ds  4   ; 6 chars for printing dec
 _temp   db  0,0
