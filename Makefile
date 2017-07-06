@@ -6,7 +6,7 @@ clean:
 	rm $(TARGETS)
 
 print_uint16_sans_zp: print_uint16_sans_zp.s
-	merlin32  print_uint16.s
+	merlin32          print_uint16_sans_zp.s
 
 print_uint16_with_zp: print_uint16_with_zp.s
 	merlin32          print_uint16_with_zp.s
