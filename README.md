@@ -37,9 +37,10 @@ Copy/Paste into your favorite emulator.
 [WTFPL](http://www.wtfpl.net/)
 
 
-# Thaanks
+# Thanks
 
 * qkumba for great optimization ideas as always
+* Everyone on comp.sys.apple2
 
 
 # References
