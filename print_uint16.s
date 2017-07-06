@@ -68,8 +68,8 @@ _PrintDone
         RTS
 
 
-; Converts A to Hex digits, stores two chars in _temp+0, _temp+1
-; @return: A will be bottom nibble in ASCII
+; Converts A to high ASCII digits, stores chars in _output
+; @return: A will be bottom nibble in high ASCII
 HexA
         PHA
         JSR SCRN2+2     ; LSR x4 == 0>> 4
