@@ -4,15 +4,17 @@ COUT = $FDED
 
         LDA #$12
         LDX #$34
-        JMP PrintUint
+        JMP PrintUint16
 
 ; Print unsigned 16-bit integer
+; A=High byte
+; X=Low  byte
+; Also see: Applesoft LINPRT @ ED24
 ; ======================================================================
-PrintUint
+PrintUint16
         STX _temp+0 
         STA _temp+1
 
-PrintDecYX
         LDA #0
         STA _len        ; output buffer len = num digits to print
         STA _bcd+0
@@ -39,7 +41,7 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         CLD
 
 DecWidth
-        LDY #3          ; intentional buffer overflow - 8 digit output
+        LDY #3          ; intentional buffer overflow - 8 digit output for special case of $0000
 BCD2Chars
         LDA _bcd,Y
         JSR HexA        ; _output[0..7] = '?'
