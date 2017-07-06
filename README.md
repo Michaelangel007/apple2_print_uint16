@@ -1,10 +1,12 @@
 # Print unsigned 16-bit
 
-6502 assembly code to print an unsigned 16-bit in 91 bytes ($5B).
+6502 assembly code to print an unsigned 16-bit.
 
 Features:
 
-* No zero-page usage
+* Highly optimized for space
+* No zero-page usage [version](print_uint16.s) 90 ($5A) bytes
+* With zero-page usage [version](print_uint16_zp.s) 78 ($4E) bytes
 * Only 2 ROM entry points: COUT, SCRN2
 * Includes 7 byte demo
 
@@ -12,11 +14,13 @@ Features:
 
 Copy/Paste into your favorite emulator.
 
+Sans-Zero-Page version:
+
 ```asm
 0800:A9 12 A2 34 4C 07 08 8E
-0808:61 08 48 A2 00 8E 5D 08
+0808:60 08 48 A2 00 8E 5D 08
 0810:8E 5E 08 8E 5F 08 A2 10
-0818:F8 0E 61 08 68 2A 48 A0
+0818:F8 0E 60 08 68 2A 48 A0
 0820:FD B9 60 07 79 60 07 99
 0828:60 07 C8 D0 F4 CA D0 E9
 0830:68 D8 A0 03 B9 5C 08 20
@@ -25,9 +29,24 @@ Copy/Paste into your favorite emulator.
 0848:68 29 0F D0 04 E0 00 F0
 0850:EF C9 0A 90 02 69 06 69
 0858:B0 E8 4C ED FD 00 00 00
-0860:00 00
+0860:00 
 ```
 
+With-Zero-Page version:
+
+```asm
+0900:A9 12 A2 34 4C 07 09 86
+0908:FC 48 A0 00 84 FD 84 FE
+0910:84 FF A0 10 F8 06 FC 68
+0918:2A 48 A2 FD B5 00 75 00
+0920:95 00 E8 D0 F7 88 D0 ED
+0928:68 D8 A0 03 B9 FC 00 20
+0930:39 09 88 D0 F7 8A F0 11
+0938:60 48 20 7B F8 20 43 09
+0940:68 29 0F D0 04 E0 00 F0
+0948:EF C9 0A 90 02 69 06 69
+0950:B0 E8 4C ED FD 
+```
 
 # License
 
@@ -37,6 +56,7 @@ Copy/Paste into your favorite emulator.
 # Thanks
 
 * qkumba for great optimization ideas as always
+* Gid for a gental nudge to have a zero-page version
 * Everyone on comp.sys.apple2
 
 

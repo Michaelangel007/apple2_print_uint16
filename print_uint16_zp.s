@@ -8,7 +8,11 @@
 COUT    = $FDED
 SCRN2   = $F879
 
-        ORG $800
+; Zero-Page Version - 4 locations used
+_temp   = $fc
+_bcd    = $fd   ; NOTE: MUST be at $FD for ZP,X addressing in _DoubleDabble
+
+        ORG $900 ; Intentionally different from sans-zero-page version for testing both
 
         LDA #$12
         LDX #$34
@@ -23,13 +27,13 @@ PrintUint16
         STX _temp  
         PHA             ; Optimized: STA _temp+1
 
-        LDX #0
-        STX _bcd+0
-        STX _bcd+1
-        STX _bcd+2
+        LDY #0
+        STY _bcd+0
+        STY _bcd+1
+        STY _bcd+2
 
 Dec2BCD
-        LDX   #16       ; 16 bits
+        LDY   #16       ; 16 bits
         SED             ; "Double Dabble"
 _Dec2BCD                ; https://en.wikipedia.org/wiki/Double_dabble
         ASL _temp+0     ;     abcd efgh | ijkl mnop |
@@ -39,14 +43,14 @@ _Dec2BCD                ; https://en.wikipedia.org/wiki/Double_dabble
         ROL
         PHA
 
-        LDY #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
+        LDX #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
 _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
-        LDA _bcd-$FD,Y
-        ADC _bcd-$FD,Y
-        STA _bcd-$FD,Y
-        INY
+        LDA _bcd-$FD,X  ; ZP,X
+        ADC _bcd-$FD,X
+        STA _bcd-$FD,X
+        INX
         BNE _DoubleDabble
-        DEX
+        DEY
         BNE _Dec2BCD
 
         PLA             ; keep stack
@@ -89,7 +93,4 @@ _Hex2Asc
 PutChar
         INX             ; X = output string length
         JMP COUT
-
-_bcd    ds  3   ; 6 chars for printing dec
-_temp   db  0
 
