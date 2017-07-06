@@ -6,7 +6,7 @@ Features:
 
 * Highly optimized for space
 * No zero-page usage   [version](print_uint16.s)    79 ($4F) bytes
-* With zero-page usage [version](print_uint16_zp.s) 69 ($45) bytes
+* With zero-page usage [version](print_uint16_zp.s) 67 ($43) bytes
 * With stack var usage [version](print_uint16_sp.s) 83 ($53) bytes
 * Only 2 ROM entry points used: PRHEXZ, SCRN2
 * Includes 7 byte demo
@@ -35,15 +35,15 @@ With-Zero-Page version:
 
 ```asm
 0900:A9 12 A2 34 4C 07 09 86
-0908:FC 48 A0 00 84 FD 84 FE
-0910:84 FF A0 10 F8 06 FC 68
-0918:2A 48 A2 FD B5 00 75 00
-0920:95 00 E8 D0 F7 88 D0 ED
-0928:68 D8 A0 03 B9 FC 00 20
-0930:39 09 88 D0 F7 8A F0 0E
-0938:60 48 20 7B F8 20 43 09
-0940:68 29 0F D0 01 CA E8 F0
-0948:EF 4C E5 FD
+0908:FC A0 00 84 FD 84 FE 84
+0910:FF A0 10 F8 06 FC 2A 48
+0918:A2 FD B5 00 75 00 95 00
+0920:E8 D0 F7 68 88 D0 ED D8
+0928:A0 03 B9 FC 00 20 37 09
+0930:88 D0 F7 8A F0 0E 60 48
+0938:20 7B F8 20 41 09 68 29
+0940:0F D0 01 CA E8 F0 EF 4C
+0948:E5 FD 
 ```
 
 With-Stack-Page version:

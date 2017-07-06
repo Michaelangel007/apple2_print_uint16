@@ -25,7 +25,6 @@ _bcd    = $fd   ; NOTE: MUST be at $FD for ZP,X addressing in _DoubleDabble
 ; ======================================================================
 PrintUint16
         STX _temp  
-        PHA             ; Optimized: STA _temp+1
 
         LDY #0
         STY _bcd+0
@@ -39,9 +38,8 @@ _Dec2BCD                ; https://en.wikipedia.org/wiki/Double_dabble
         ASL _temp+0     ;     abcd efgh | ijkl mnop |
 ;       ROL _temp+1     ; C=a bcde fghi | jklm nop0 |
 ;                       ; Bit 7654_3210 | 7654_3210 |
-        PLA
         ROL
-        PHA
+        PHA             ; Optimized: STA _temp+1
 
         LDX #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
 _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
@@ -50,10 +48,10 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         STA _bcd-$FD,X
         INX
         BNE _DoubleDabble
+        PLA             ; keep stack
         DEY
         BNE _Dec2BCD
 
-        PLA             ; keep stack
         CLD             ; X=0 = output length
 
 DecWidth
