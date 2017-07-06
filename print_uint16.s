@@ -5,7 +5,7 @@
 ; Thanks to Gids for nudging a zero-page version
 
 ; F8 ROM Entry Points
-COUT    = $FDED
+PRHEXZ  = $FDE5
 SCRN2   = $F879
 
         ORG $800
@@ -82,13 +82,7 @@ _HexNib
 _HaveLeadingDigit
         INX             ; X = flag to specify non-zero leading digit was seen
         BEQ _PrintDone
-
-        CMP #$A         ; n < 10 ?
-        BCC _Hex2Asc
-        ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
-_Hex2Asc
-        ADC #'0' + $80  ; inverse=remove #$80
-        JMP COUT
+        JMP PRHEXZ
 
 _bcd    ds  3   ; 6 chars for printing dec
 _temp   db  0

@@ -5,7 +5,7 @@
 ; Thanks to Gids for nudging a zero-page version
 
 ; F8 ROM Entry Points
-COUT    = $FDED
+PRHEXZ  = $FDE5
 SCRN2   = $F879
 
         ORG $A00 ; Intentionally different from sans-zero-page & with-zero-page
@@ -90,12 +90,5 @@ _HexNib
 _HaveLeadingDigit
         INY             ; Y = output string length
         BEQ _PrintDone
-
-        CMP #$A         ; n < 10 ?
-        BCC _Hex2Asc
-        ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
-_Hex2Asc
-        ADC #'0' + $80  ; inverse=remove #$80
-PutChar
-        JMP COUT
+        JMP PRHEXZ
 

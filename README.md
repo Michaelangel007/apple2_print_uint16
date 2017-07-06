@@ -5,9 +5,9 @@
 Features:
 
 * Highly optimized for space
-* No zero-page usage   [version](print_uint16.s)    89 ($59) bytes
-* With zero-page usage [version](print_uint16_zp.s) 77 ($4D) bytes
-* With stack var usage [version](print_uint16_sp.s) 91 ($5B) bytes
+* No zero-page usage   [version](print_uint16.s)    81 ($51) bytes
+* With zero-page usage [version](print_uint16_zp.s) 69 ($45) bytes
+* With stack var usage [version](print_uint16_sp.s) 83 ($53) bytes
 * Only 2 ROM entry points: COUT, SCRN2
 * Includes 7 byte demo
 
@@ -19,17 +19,16 @@ Sans-Zero-Page version:
 
 ```asm
 0800:A9 12 A2 34 4C 07 08 8E
-0808:5F 08 48 A2 00 8E 5C 08
-0810:8E 5D 08 8E 5E 08 A2 10
-0818:F8 0E 5F 08 68 2A 48 A0
-0820:FD B9 5F 07 79 5F 07 99
-0828:5F 07 C8 D0 F4 CA D0 E9
-0830:68 D8 A0 03 B9 5B 08 20
+0808:57 08 48 A2 00 8E 54 08
+0810:8E 55 08 8E 56 08 A2 10
+0818:F8 0E 57 08 68 2A 48 A0
+0820:FD B9 57 07 79 57 07 99
+0828:57 07 C8 D0 F4 CA D0 E9
+0830:68 D8 A0 03 B9 53 08 20
 0838:41 08 88 D0 F7 8A F0 0E
 0840:60 48 20 7B F8 20 4B 08
 0848:68 29 0F D0 01 CA E8 F0
-0850:EF C9 0A 90 02 69 06 69
-0858:B0 4C ED FD 00 00 00 00
+0850:EF 4C E5 FD 00 00 00 00
 ```
 
 With-Zero-Page version:
@@ -44,8 +43,7 @@ With-Zero-Page version:
 0930:39 09 88 D0 F7 8A F0 0E
 0938:60 48 20 7B F8 20 43 09
 0940:68 29 0F D0 01 CA E8 F0
-0948:EF C9 0A 90 02 69 06 69
-0950:B0 4C ED FD 
+0948:EF 4C E5 FD
 ```
 
 With-Stack-Page version:
@@ -61,9 +59,8 @@ With-Stack-Page version:
 0A38:98 F0 19 60 BD 01 01 7D
 0A40:01 01 9D 01 01 E8 60 48
 0A48:20 7B F8 20 51 0A 68 29
-0A50:0F D0 01 88 C8 F0 E4 C9
-0A58:0A 90 02 69 06 69 B0 4C
-0A60:ED FD
+0A50:0F D0 01 88 C8 F0 E4 4C
+0A58:E5 FD
 ```
 
 # License
