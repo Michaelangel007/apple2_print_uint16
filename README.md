@@ -75,7 +75,7 @@ With-Stack-Page version:
 # Thanks
 
 * qkumba for great optimization ideas as always
-* Gid for a gental nudge to have a zero-page version
+* Gids for a gentle nudge to have a zero-page version
 * Everyone on comp.sys.apple2
 
 

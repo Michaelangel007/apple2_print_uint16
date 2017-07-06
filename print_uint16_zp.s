@@ -2,7 +2,7 @@
 ; https://github.com/Michaelangel007/apple2_print_uint16
 ; Optimized from printm
 ; Thanks to qkumba for optimizations
-; Thanks to gid for nudging a zero-page version
+; Thanks to Gids for nudging a zero-page version
 
 ; F8 ROM Entry Points
 COUT    = $FDED
