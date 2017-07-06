@@ -85,16 +85,17 @@ HexA
         AND #$F
 _HexNib
         BNE _HaveLeadingDigit   ; If have leading zero and no output yet ...
-        CPY #0                  ; ... then skip storing it
-        BEQ _PrintDone
+        DEY                     ; ... then skip storing it
 
 _HaveLeadingDigit
+        INY             ; Y = output string length
+        BEQ _PrintDone
+
         CMP #$A         ; n < 10 ?
         BCC _Hex2Asc
         ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
 _Hex2Asc
         ADC #'0' + $80  ; inverse=remove #$80
 PutChar
-        INY             ; Y = output string length
         JMP COUT
 

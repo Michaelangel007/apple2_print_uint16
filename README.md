@@ -5,9 +5,9 @@
 Features:
 
 * Highly optimized for space
-* No zero-page usage   [version](print_uint16.s)    90 ($5A) bytes
-* With zero-page usage [version](print_uint16_zp.s) 78 ($4E) bytes
-* With stack var usage [version](print_uint16_sp.s) 92 ($5C) bytes
+* No zero-page usage   [version](print_uint16.s)    89 ($59) bytes
+* With zero-page usage [version](print_uint16_zp.s) 77 ($4D) bytes
+* With stack var usage [version](print_uint16_sp.s) 91 ($5B) bytes
 * Only 2 ROM entry points: COUT, SCRN2
 * Includes 7 byte demo
 
@@ -19,18 +19,17 @@ Sans-Zero-Page version:
 
 ```asm
 0800:A9 12 A2 34 4C 07 08 8E
-0808:60 08 48 A2 00 8E 5D 08
-0810:8E 5E 08 8E 5F 08 A2 10
-0818:F8 0E 60 08 68 2A 48 A0
-0820:FD B9 60 07 79 60 07 99
-0828:60 07 C8 D0 F4 CA D0 E9
-0830:68 D8 A0 03 B9 5C 08 20
-0838:41 08 88 D0 F7 8A F0 11
+0808:5F 08 48 A2 00 8E 5C 08
+0810:8E 5D 08 8E 5E 08 A2 10
+0818:F8 0E 5F 08 68 2A 48 A0
+0820:FD B9 5F 07 79 5F 07 99
+0828:5F 07 C8 D0 F4 CA D0 E9
+0830:68 D8 A0 03 B9 5B 08 20
+0838:41 08 88 D0 F7 8A F0 0E
 0840:60 48 20 7B F8 20 4B 08
-0848:68 29 0F D0 04 E0 00 F0
+0848:68 29 0F D0 01 CA E8 F0
 0850:EF C9 0A 90 02 69 06 69
-0858:B0 E8 4C ED FD 00 00 00
-0860:00 
+0858:B0 4C ED FD 00 00 00 00
 ```
 
 With-Zero-Page version:
@@ -42,11 +41,11 @@ With-Zero-Page version:
 0918:2A 48 A2 FD B5 00 75 00
 0920:95 00 E8 D0 F7 88 D0 ED
 0928:68 D8 A0 03 B9 FC 00 20
-0930:39 09 88 D0 F7 8A F0 11
+0930:39 09 88 D0 F7 8A F0 0E
 0938:60 48 20 7B F8 20 43 09
-0940:68 29 0F D0 04 E0 00 F0
+0940:68 29 0F D0 01 CA E8 F0
 0948:EF C9 0A 90 02 69 06 69
-0950:B0 E8 4C ED FD 
+0950:B0 4C ED FD 
 ```
 
 With-Stack-Page version:
@@ -59,12 +58,12 @@ With-Stack-Page version:
 0A20:0A 20 3C 0A 88 D0 EA D8
 0A28:BD 00 01 20 47 0A CA E0
 0A30:00 D0 F5 8A 69 04 AA 9A
-0A38:98 F0 1C 60 BD 01 01 7D
+0A38:98 F0 19 60 BD 01 01 7D
 0A40:01 01 9D 01 01 E8 60 48
 0A48:20 7B F8 20 51 0A 68 29
-0A50:0F D0 04 C0 00 F0 E4 C9
-0A58:0A 90 02 69 06 69 B0 C8
-0A60:4C ED FD
+0A50:0F D0 01 88 C8 F0 E4 C9
+0A58:0A 90 02 69 06 69 B0 4C
+0A60:ED FD
 ```
 
 # License
