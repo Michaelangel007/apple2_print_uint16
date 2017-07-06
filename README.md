@@ -5,7 +5,7 @@
 
 * No zero-page usage
 * Only 1 ROM entry point: COUT
-
+* Includes 7 byte demo
 
 # Machine Code
 
