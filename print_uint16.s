@@ -1,4 +1,5 @@
-COUT = $FDED
+COUT    = $FDED
+SCRN2   = $F879
 
         ORG $800
 
@@ -12,11 +13,10 @@ COUT = $FDED
 ; Also see: Applesoft LINPRT @ ED24
 ; ======================================================================
 PrintUint16
-        STX _temp+0 
+        STX _temp+0
         STA _temp+1
 
         LDA #0
-        STA _len        ; output buffer len = num digits to print
         STA _bcd+0
         STA _bcd+1
         STA _bcd+2
@@ -38,7 +38,7 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
 
         DEX
         BNE _Dec2BCD
-        CLD
+        CLD             ; X=0 = output length
 
 DecWidth
         LDY #3          ; intentional buffer overflow - 8 digit output for special case of $0000
@@ -47,6 +47,8 @@ BCD2Chars
         JSR HexA        ; _output[0..7] = '?'
         DEY
         BPL BCD2Chars
+
+        STX _len        ; output buffer len = num digits to print
 
 SkipLeadZero
         INY
@@ -58,7 +60,7 @@ SkipLeadZero
 
 OutDigits
         LDA _output,Y   ; always print digit in "ones" place
-        JSR COUT       
+        JSR COUT
         INY
         CPY _len
         BCC OutDigits
@@ -70,27 +72,24 @@ _PrintDone
 ; @return: A will be bottom nibble in ASCII
 HexA
         PHA
-        LSR
-        LSR
-        LSR
-        LSR
+        JSR SCRN2+2     ; LSR x4 == 0>> 4
         JSR _HexNib
         PLA
+        AND #$F
 _HexNib
-        AND #$F              ; Can NOT't Use ROM Entry Point SCRN2+2 as the Laser 128 leaves off AND #$F !!
         CMP #$A         ; n < 10 ?
         BCC _Hex2Asc
         ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
 _Hex2Asc
         ADC #'0' + $80  ; inverse=remove #$80
 PutChar
-        LDX #0          ; NOTE: length = PutChar+1
         STA _output,X
-        INC _len
+        INX             ; X = output string length
         RTS
 
+
 _bcd    ds  4   ; 6 chars for printing dec
-_len    = PutChar+1
+_len    = _bcd  ; alias
 _output ds  6   ; BCD -> 6 chars
 _temp   db  0,0
 
