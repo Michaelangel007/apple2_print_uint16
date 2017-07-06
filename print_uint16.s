@@ -17,20 +17,24 @@ SCRN2   = $F879
 ; Also see: Applesoft LINPRT @ ED24
 ; ======================================================================
 PrintUint16
-        STX _temp+0
-        STA _temp+1
+        STX _temp  
+        PHA             ; Optimized: STA _temp+1
 
-        LDA #0
-        STA _bcd+0
-        STA _bcd+1
-        STA _bcd+2
+        LDX #0
+        STX _bcd+0
+        STX _bcd+1
+        STX _bcd+2
 
 Dec2BCD
         LDX   #16       ; 16 bits
         SED             ; "Double Dabble"
 _Dec2BCD                ; https://en.wikipedia.org/wiki/Double_dabble
-        ASL _temp+0
-        ROL _temp+1
+        ASL _temp+0     ;     abcd efgh | ijkl mnop |
+;       ROL _temp+1     ; C=a bcde fghi | jklm nop0 |
+;                       ; Bit 7654_3210 | 7654_3210 |
+        PLA
+        ROL
+        PHA
 
         LDY #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
 _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
@@ -39,9 +43,10 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         STA _bcd-$FD,Y
         INY
         BNE _DoubleDabble
-
         DEX
         BNE _Dec2BCD
+
+        PLA             ; keep stack
         CLD             ; X=0 = output length
 
 DecWidth
@@ -52,8 +57,7 @@ BCD2Chars
         DEY
         BNE BCD2Chars
 
-        TXA
-        CPX #0          ; Handle special case input = $0000 of no output
+        TXA             ; Handle special case input = $0000 of no output
         BEQ  _HaveLeadingDigit
 
 _PrintDone
@@ -84,5 +88,5 @@ PutChar
         JMP COUT
 
 _bcd    ds  4   ; 6 chars for printing dec
-_temp   db  0,0
+_temp   db  0
 
