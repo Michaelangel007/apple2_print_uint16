@@ -1,13 +1,13 @@
 # Print unsigned 16-bit
 
-6502 assembly code to print an unsigned 16-bit in decimal.
+6502 assembly code to print an unsigned 16-bit in decimal -- 3 versions to pick from.
 
 Features:
 
 * Highly optimized for space
-* No zero-page usage   [version](print_uint16.s)    79 ($4F) bytes
-* With zero-page usage [version](print_uint16_zp.s) 67 ($43) bytes
-* With stack var usage [version](print_uint16_sp.s) 83 ($53) bytes
+* [Sans zero-page usage](print_uint16_sans_zp.s) 79 ($4F) bytes
+* [With zero-page usage](print_uint16_with_zp.s) 67 ($43) bytes
+* [With stack var usage](print_uint16_with_sp.s) 83 ($53) bytes
 * Only 2 ROM entry points used: PRHEXZ, SCRN2
 * Includes 7 byte demo
 
