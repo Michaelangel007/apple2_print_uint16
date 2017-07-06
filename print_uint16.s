@@ -21,12 +21,11 @@ SCRN2   = $F879
 ; ======================================================================
 PrintUint16
         STX _temp  
-        PHA             ; Optimized: STA _temp+1
 
-        LDX #0
-        STX _bcd+0
-        STX _bcd+1
-        STX _bcd+2
+        LDX #0          ; Optional 65C02 version
+        STX _bcd+0      ; STZ _bcd+0
+        STX _bcd+1      ; STZ _bcd+1
+        STX _bcd+2      ; STZ _bcd+2
 
 Dec2BCD
         LDX   #16       ; 16 bits
@@ -35,9 +34,8 @@ _Dec2BCD                ; https://en.wikipedia.org/wiki/Double_dabble
         ASL _temp+0     ;     abcd efgh | ijkl mnop |
 ;       ROL _temp+1     ; C=a bcde fghi | jklm nop0 |
 ;                       ; Bit 7654_3210 | 7654_3210 |
-        PLA
         ROL
-        PHA
+        PHA             ; Optimized: STA _temp+1
 
         LDY #$FD        ; $00-$FD=-3 bcd[0] bcd[1] bcd[2] bcd[3]
 _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
@@ -46,10 +44,10 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         STA _bcd-$FD,Y
         INY
         BNE _DoubleDabble
+        PLA
         DEX
         BNE _Dec2BCD
 
-        PLA             ; keep stack
         CLD             ; X=0 = output length
 
 DecWidth

@@ -1,14 +1,14 @@
 # Print unsigned 16-bit
 
-6502 assembly code to print an unsigned 16-bit.
+6502 assembly code to print an unsigned 16-bit in decimal.
 
 Features:
 
 * Highly optimized for space
-* No zero-page usage   [version](print_uint16.s)    81 ($51) bytes
+* No zero-page usage   [version](print_uint16.s)    79 ($4F) bytes
 * With zero-page usage [version](print_uint16_zp.s) 69 ($45) bytes
 * With stack var usage [version](print_uint16_sp.s) 83 ($53) bytes
-* Only 2 ROM entry points: COUT, SCRN2
+* Only 2 ROM entry points used: PRHEXZ, SCRN2
 * Includes 7 byte demo
 
 # Machine Code
@@ -19,16 +19,16 @@ Sans-Zero-Page version:
 
 ```asm
 0800:A9 12 A2 34 4C 07 08 8E
-0808:57 08 48 A2 00 8E 54 08
-0810:8E 55 08 8E 56 08 A2 10
-0818:F8 0E 57 08 68 2A 48 A0
-0820:FD B9 57 07 79 57 07 99
-0828:57 07 C8 D0 F4 CA D0 E9
-0830:68 D8 A0 03 B9 53 08 20
-0838:41 08 88 D0 F7 8A F0 0E
-0840:60 48 20 7B F8 20 4B 08
-0848:68 29 0F D0 01 CA E8 F0
-0850:EF 4C E5 FD 00 00 00 00
+0808:55 08 A2 00 8E 52 08 8E
+0810:53 08 8E 54 08 A2 10 F8
+0818:0E 55 08 2A 48 A0 FD B9
+0820:55 07 79 55 07 99 55 07
+0828:C8 D0 F4 68 CA D0 E9 D8
+0830:A0 03 B9 51 08 20 3F 08
+0838:88 D0 F7 8A F0 0E 60 48
+0840:20 7B F8 20 49 08 68 29
+0848:0F D0 01 CA E8 F0 EF 4C
+0850:E5 FD 00 00 00 00
 ```
 
 With-Zero-Page version:
