@@ -2,9 +2,10 @@
 
 6502 assembly code to print an unsigned 16-bit in 96 bytes ($60).
 
+Features:
 
 * No zero-page usage
-* Only 1 ROM entry point: COUT
+* Only 2 ROM entry points: COUT, SCRN2
 * Includes 7 byte demo
 
 # Machine Code
