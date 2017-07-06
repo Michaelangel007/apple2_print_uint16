@@ -1,3 +1,7 @@
+; Michael Pohoreski
+; Optimized from printm
+; Thanks to qkumba for optimizations
+; F8 ROM Entry Points
 COUT    = $FDED
 SCRN2   = $F879
 
@@ -41,22 +45,18 @@ _DoubleDabble           ;              Y=FD   Y=FE   Y=FF   Y=00
         CLD             ; X=0 = output length
 
 DecWidth
-        LDY #3          ; intentional buffer overflow - 8 digit output for special case of $0000
+        LDY #4          ; 6 digit output for special case of $0000
+
+        LDA #'0' + $80  ; handle special case input = $0000
+        STA _output     ; since we always print at least 1 digit
+
 BCD2Chars
-        LDA _bcd,Y
+        LDA _bcd-1,Y
         JSR HexA        ; _output[0..7] = '?'
         DEY
-        BPL BCD2Chars
+        BNE BCD2Chars
 
         STX _len        ; output buffer len = num digits to print
-
-SkipLeadZero
-        INY
-        CPY _len
-        BEQ OutDigits
-        LDA _output,Y
-        CMP #'0' + $80  ; skip all leading zero's
-        BEQ SkipLeadZero
 
 OutDigits
         LDA _output,Y   ; always print digit in "ones" place
@@ -77,7 +77,13 @@ HexA
         PLA
         AND #$F
 _HexNib
+        BNE _HaveLeadingDigit   ; If have leading zero and no output yet ...
+        CPX #0                  ; ... then skip storing it
+        BEQ _HexAsciiDone
+
+_HaveLeadingDigit
         CMP #$A         ; n < 10 ?
+
         BCC _Hex2Asc
         ADC #6          ; n += 6    $A -> +6 + (C=1) = $11
 _Hex2Asc
@@ -85,6 +91,7 @@ _Hex2Asc
 PutChar
         STA _output,X
         INX             ; X = output string length
+_HexAsciiDone
         RTS
 
 
