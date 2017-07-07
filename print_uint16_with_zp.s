@@ -10,7 +10,7 @@ SCRN2   = $F879
 
 ; Zero-Page Version - 4 locations used
 _temp   = $fc
-_bcd    = $fd   ; NOTE: MUST be at $FD for ZP,X addressing in _DoubleDabble
+_bcd    = $fd   ; NOTE: Optimized for ZP,X addressing in _DoubleDabble
 
         ORG $900 ; Intentionally different from sans-zero-page version for testing both
 
