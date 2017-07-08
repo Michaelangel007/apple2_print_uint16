@@ -8,12 +8,6 @@
 PRHEXZ  = $FDE5
 SCRN2   = $F879
 
-        ORG $A00 ; Intentionally different from sans-zero-page & with-zero-page
-
-        LDA #$12
-        LDX #$34
-        JMP PrintUint16
-
 ; Print unsigned 16-bit integer
 ; A=High byte
 ; X=Low  byte

@@ -12,12 +12,6 @@ SCRN2   = $F879
 _temp   = $fc
 _bcd    = $fd   ; NOTE: Optimized for ZP,X addressing in _DoubleDabble
 
-        ORG $900 ; Intentionally different from sans-zero-page version for testing both
-
-        LDA #$12
-        LDX #$34
-        JMP PrintUint16
-
 ; Print unsigned 16-bit integer
 ; A=High byte
 ; X=Low  byte
