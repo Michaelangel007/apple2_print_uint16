@@ -1,7 +1,8 @@
+// g++ -Wall -Wextra printu16.c -o printu16
 #include <stdio.h>  // putchar()
 #include <stdlib.h> // strtoul()
 
-void printu16( unsigned x )
+void printu16( unsigned short x )
 {
     char digits[6];
     int  len = 0;
